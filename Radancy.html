@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Radancy Feed</title>
+</head>
+<body>
+    <h1>XML Content</h1>
+    <pre id="output">Loading...</pre>
+
+    <script>
+        fetch('Radancy.xml')
+            .then(response => {
+                if (!response.ok) throw new Error("Network response was not ok");
+                return response.text();
+            })
+            .then(str => {
+                // Optional: format nicely
+                const formatted = str.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                document.getElementById('output').innerHTML = formatted;
+            })
+            .catch(error => {
+                document.getElementById('output').textContent = 'Error loading XML: ' + error;
+            });
+    </script>
+</body>
+</html>
